@@ -11,9 +11,9 @@ FORCED to go RIGHT
 */
 void alg1(string minmax, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 {
-	int h=fData.size(); //looks at the outter most level, giving height
+	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
-	int w=fData[0].size(); //looks at an inner-level, giving width
+	int w=fData[0].size()-1; //looks at an inner-level, giving width
 	int i=0;
 	int j=0;
 	string Path;
@@ -22,34 +22,33 @@ void alg1(string minmax, vector<vector<int> > fData) //Greedy - Immediate Neighb
 
 	if (minmax == "min")
 	{
-		cout << "Alg1 MIN\n";
+		cout << "Alg1 MIN on " << h << " x " << w <<endl;
 		while ((i !=h) && (j !=w))
 		{
 			cout << endl << "Current Reward: " << Reward << endl;
 			cout << j << "," << i << ": ";
-
-			if (i+1<= h)
+			if (i+1<= w) ////////////////////
 			{
 				if (fData[i+1][j]<fData[i][j+1])
 				{
-					cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go UP.\n ";
-					Path.append("U");
+					cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go RIGHT.\n ";
+					Path.append("R");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
 					PathReward += fData[i][j] + "+";
 				}
-				else if (j+1<=w)
+				else if (j+1<=w) /////////////////
 				{
-					cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go RIGHT.\n";
-					Path.append("R");
+					cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go UP.\n";
+					Path.append("U");
 					j++;
 					Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
 					PathReward += fData[i][j] + "+";
 				}
 				else
 				{
-					cout << "I cannot increase j any more. j = " << j << "so I'm FORCED to go UP.\n";
-					Path.append("U");
+					cout << "I cannot increase j any more. j = " << j << "so I'm FORCED to go RIGHT.\n";
+					Path.append("R");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
 					PathReward += fData[i][j] + "+";	
@@ -57,17 +56,17 @@ void alg1(string minmax, vector<vector<int> > fData) //Greedy - Immediate Neighb
 			}
 			else //if increasing i would go off the grid
 			{
-				cout << "I cannot increase i any more. i = " << i << " so I'm FORCED to go RIGHT.\n";
+				cout << "I cannot increase i any more. i = " << i << " so I'm FORCED to go UP.\n";
 				if (j+1<=w)
 				{
-					Path.append("R");
+					Path.append("U");
 					j++;
 					Reward += fData[i][j];
 					PathReward += fData[i][j] + "+";
 				}
-				else //this should never be reached because i=h and j=w should break out of the while loop.
+				else //this should never be reached because j=h and i=w should break out of the while loop.
 				{
-					cout << "Hit error statement 1\ni,j = " << i << "," << j << "\nh,w = " << h << "," << w;
+					cout << "Hit error statement 1\nj,i = " << j << "," << i << "\nh,w = " << h << "," << w;
 				}
 			}
 		}
