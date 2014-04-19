@@ -63,7 +63,7 @@ vector<vector<int> > readFile(string filename)
 		for(unsigned l=0;l<width;l++)
 		{
 			std::getline(fin,line, ','); //read in x value, discard
-				std::getline(fin,line, ','); //read in y value, discard
+			std::getline(fin,line, ','); //read in y value, discard
 			std::getline(fin,line); //read in the actual value
 			currentRow.push_back(atoi(line.c_str())); //converts the value from str to int
 //			cout << l;
