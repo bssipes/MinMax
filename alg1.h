@@ -23,7 +23,7 @@ void alg1(string minmax, vector<vector<int> > fData) //Greedy - Immediate Neighb
 	if (minmax == "min")
 	{
 		cout << "Alg1 MIN on " << h << " x " << w <<endl;
-		while ((i !=h) && (j !=w))
+		while ((i !=w) && (j !=h))
 		{
 			cout << endl << "Current Reward: " << Reward << endl;
 			cout << j << "," << i << ": ";
