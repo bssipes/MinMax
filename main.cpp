@@ -2,9 +2,6 @@
 CS404 Algorithms
 April 22, 2014
 Version 0.2
-CHANELOG:
-0.1 File created, no functionality
-0.2 Able to parse the provided example file
 
 PRE-ALGORITHM SETUP
 1) Read in a source file of numbers and GENERATE an 'array' based on this file
@@ -37,7 +34,8 @@ If they're equal, greedy (choose whichever is higher/lower of the immediate choi
 
 
 Version History: 
-0.1: Only comments. Wrote up general algorithms for 1, 2, and 3 and described the problem setup steps
+0.1: Only comments. Wrote up general algorithms for 1, 2, 3, and 4 and described the problem setup steps
+0.2 Able to parse the provided example file
 */
 
 #include <fstream>
