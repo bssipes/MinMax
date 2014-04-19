@@ -9,10 +9,8 @@ PRE-ALGORITHM SETUP
 2) Add in code to time the algorithm
 (SVC-calls, CPTime)
 
-
 Algorithm 1: Greedy-Immediate Neighbors
 Compare all 1-step options (i+1, j+1) (up or right), choose LARGEST/SMALLEST (WARNING: STAY IN BOUNDS!), ADD to sum, RECORD path
-
 
 Algorithm 2: Greedy- Min/Max Values of Array
 Make a copy of the array and sort it by value
@@ -23,7 +21,7 @@ Go to next largest (target[i] >= current[i] and target[j] >= current[j]) by the 
 
 Algorithm 3: Random Choice
 While this makes no attempt to be the best, it'll help to make sure I have safeguards in for going out of bounds
-Test twice, pretend largest is the "approximate" maximum and the smaller is the "approximate" minimum.
+Test x times, pretend largest is the "approximate" maximum and the smaller is the "approximate" minimum.
 
 Algorithm 4: 
 Sum all choices by row and by column
@@ -35,7 +33,7 @@ If they're equal, greedy (choose whichever is higher/lower of the immediate choi
 
 Version History: 
 0.1: Only comments. Wrote up general algorithms for 1, 2, 3, and 4 and described the problem setup steps
-0.2 Able to parse the provided example file
+0.2: Able to parse provided sample data
 */
 
 #include <fstream>
@@ -49,7 +47,7 @@ Version History:
 
 vector<vector<int> > readFile(string filename)
 {
-	vector<vector<int>> fileData;
+	vector<vector<int> > inputData;
 	vector<int> currentRow;
 	ifstream fin(filename);
 	string line;
@@ -68,18 +66,19 @@ vector<vector<int> > readFile(string filename)
 			currentRow.push_back(atoi(line.c_str())); //converts the value from str to int
 //			cout << l;
 		}
-		fileData.push_back(currentRow); //places currentRow instead fileData vector
+		inputData.push_back(currentRow); //places currentRow instead fileData vector
+		currentRow.clear();
 //		cout << "Finished reading row " << k << endl;
 	}
 	fin.close();
 //	cout << "Finished reading the whole file." << endl;
-	return fileData;
+	return inputData;
 }
 
 void main()
 {
 	vector<vector<int> > fileData = readFile("data.txt");
-	//alg1("min",fileData);
+	alg1("min",fileData);
 	//alg1("max",fileData);
 	return;
 }
