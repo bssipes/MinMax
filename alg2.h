@@ -24,18 +24,18 @@ using namespace std;
 	class cV //Coordinate Pair + Value
 	{
 	private:
-		int h, w, value; //height, width, value
+		int height, width, value;
 	public:
-		int getH(){return h;}
-		int getW(){return w;}
+		int getH(){return height;}
+		int getW(){return width;}
 		int getValue(){return value;}
-		cV(int h, int w, int value){h = h; w = w; value = value;};
+		cV(int h, int w, int v){height = h; width = w; value = v;};
 		bool operator < (const cV &other) const
 		{
 			//Sorts by Value, then W, then H (smallest to largest)
 			if (value != other.value) return value < other.value;
-			else if (w != other.w) return w < other.w;
-			else return h < other.h;
+			else if (width != other.width) return width < other.width;
+			else return height < other.height;
 		}
 	}; //end class cV
 
@@ -53,20 +53,21 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 	bool movedUp = false;
 
 	vector<cV> sortedData;
-	for (unsigned i=0; i<=h; i++)
+	for (i=0; i<=h; i++)
 	{
-		for (unsigned j=0; j<=w; j++)
+		j=0;
+		for (j=0; j<=w; j++)
 		{
 			sortedData.push_back(cV(i,j,fData[i][j])); //// PLACES ALL VALUES INTO A 1D VECTOR
 		}
 	} //end stripping 2d into 1d vector
-
+	i=0;
+	j=0;
 	if (min == true)
 	{
 		int k = 0;
 		cout << "\nAlg2 MIN on " << h << " x " << w <<endl;
 		sort(sortedData.begin(), sortedData.end()); //SORTED FROM SMALLEST TO LARGEST BY: VALUE, WIDTH, HEIGHT
-		cout << "Finished sorting!" << endl;
 		while (!((i ==h) && (j ==w)))
 		{
 			if (sortedData[k].getW()>=j && sortedData[k].getH()>=i)
@@ -74,7 +75,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 				while (j!=sortedData[k].getW())
 				{
 					movedRight = true;
-					cout << "Traveling RIGHT from " << i << "," << j << " to " << i << "," << j+1 << "and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW();
+					cout << "Traveling RIGHT from " << i << "," << j << " to " << i << "," << j+1 << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
 					Path.append("R");
 					j++;
 					Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
@@ -82,12 +83,12 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 				}
 				if (movedRight)
 				{
-					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j];
+					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
 				}
 				while (i!=sortedData[k].getH())
 				{
 					movedUp = true;
-					cout << "Traveling UP from " << i << "," << j << " to " << i+1 << "," << j << "and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW();
+					cout << "Traveling UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW() << endl;
 					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
@@ -95,7 +96,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 				}
 				if (movedUp) 
 				{
-					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j];
+					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
 				} // don't want to display this message twice if we didn't actually move
 				movedRight = false;
 				movedUp = false;
