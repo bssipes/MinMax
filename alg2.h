@@ -90,7 +90,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 					cout << "Traveling UP from " << i << "," << j << " to " << i+1 << "," << j << "and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW();
 					Path.append("U");
 					i++;
-					Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
+					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 					//PathReward += string version of the int at this location along with a "+"
 				}
 				if (movedUp) 
