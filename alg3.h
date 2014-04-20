@@ -30,7 +30,7 @@ bool compare (const pair<int,string>&x, const pair<int,string>&y)
 	return x.first < y.first;
 }
 
-void alg3(vector<vector<int> > fData) //Random
+void alg3(int runs, vector<vector<int> > fData) //Random
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
@@ -44,8 +44,8 @@ void alg3(vector<vector<int> > fData) //Random
 	char choice;
 	vector<pair<int,string>> solutions;
 	{
-		cout << "\nAlg3 RANDOM for 100,000 runs on " << h << " x " << w <<endl;
-		while (k<100000) //0 to 99
+		cout << "\nAlg3 RANDOM for " << runs << " runs on " << h << " x " << w <<endl;
+		while (k<runs) //0 to 99
 		{
 			//reset variables to initial values
 			i=0;
