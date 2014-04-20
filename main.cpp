@@ -78,7 +78,7 @@ vector<vector<int> > readFile(string filename)
 void main()
 {
 	vector<vector<int> > fileData = readFile("data.txt");
-	alg1("min",fileData);
-	//alg1("max",fileData);
+	alg1(true,fileData);
+	alg1(false,fileData);
 	return;
 }
