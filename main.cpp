@@ -15,9 +15,8 @@ Compare all 1-step options (i+1, j+1) (up or right), choose LARGEST/SMALLEST (WA
 Algorithm 2: Greedy- Min/Max Values of Array
 Make a copy of the array and sort it by value
 Go directly to the largest value 
-(option 1: all right until correct column, then up to correct row)
-(option 2: all up until correct row, then right to correct column)
-Go to next largest (target[i] >= current[i] and target[j] >= current[j]) by the same option
+(implemented option: travel right until correct column, then up to correct row)
+Go to next largest (target[j] >= current[j] and target[i] >= current[i]) by the same option
 
 Algorithm 3: Random Choice
 While this makes no attempt to be the best, it'll help to make sure I have safeguards in for going out of bounds
@@ -37,13 +36,9 @@ Version History:
 */
 
 #include <fstream>
-#include <array>
-#include <list>
 #include "alg1.h"
-//#include <string>
-//#include <iostream>
-//#include <vector>
-//using namespace std;
+#include "alg2.h"
+#include "alg3.h"
 
 vector<vector<int> > readFile(string filename)
 {
@@ -80,5 +75,8 @@ void main()
 	vector<vector<int> > fileData = readFile("data.txt");
 	alg1(true,fileData);
 	alg1(false,fileData);
+	alg2(true,fileData);
+	alg2(false,fileData);
+	alg3(100000, fileData); //100,000 runs
 	return;
 }
