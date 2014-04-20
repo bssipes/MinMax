@@ -1,6 +1,18 @@
 /* Written by Ben Sipes, except where specifically sourced
 CS404 Algorithms
 April 22, 2014
+
+Algorithm 1: Greedy-Immediate Neighbors
+Compare all 1-step options (i+1, j+1) (up or right), 
+choose LARGEST/SMALLEST (WARNING: STAY IN BOUNDS!), 
+ADD to sum, 
+RECORD path
+
+Overall, there are 4 options.
+CHOOSE to go RIGHT
+CHOOSE to go UP
+FORCED to go UP
+FORCED to go RIGHT
 */
 
 #include <string>
@@ -8,13 +20,7 @@ April 22, 2014
 #include <vector>
 #include "choose.h"
 using namespace std;
-/*
-Overall, there are 4 options.
-CHOOSE to go RIGHT
-CHOOSE to go UP
-FORCED to go UP
-FORCED to go RIGHT
-*/
+
 void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
