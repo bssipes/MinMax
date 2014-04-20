@@ -85,33 +85,36 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 					Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
 					//PathReward += string version of the int at this location along with a "+"
 				}
-				//if (movedRight)
-				//{
-				//	cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
-				//}
+				if (movedRight)
+				{
+					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
+				}
 				while (i<sortedData[k].getH())
 				{
 					movedUp = true;
-					cout << "UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW() << endl;
+					cout << "UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
 					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 					//PathReward += string version of the int at this location along with a "+"
 				}
-				//if (movedUp) 
-				//{
-				//	cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
-				//} // don't want to display this message twice if we didn't actually move
+				if (movedUp) 
+				{
+					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
+				} // don't want to display this message twice if we didn't actually move
 				movedRight = false;
 				movedUp = false;
+				cout << "k = " << k << " has been achieved. Incrementing to " << k+1 << endl;
 				k++;//after finishing both of these while loops, we've arrived at the value (sortedData[k]) we were after
+				cout << "k = " << k << endl;
 			}
 			else
 			{
 				//if the coordinate of the cV is to the left of where we already are, it is unreachable.
 				//likewise, anything below where we already are is unreachable.
 				//thusly, it needs to be skipped.
-				k++; 
+				cout << "k = " << k << " is being skipped." << endl;
+				k++;
 			}
 		}
 	}
@@ -124,7 +127,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 
 	//	}
 	//}
-	PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
+	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
 	cout << endl << "End reached! Reward: " << Reward << "\nPath taken: " << Path << endl;
 	return;
 }
