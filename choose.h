@@ -3,7 +3,7 @@ CS404 Algorithms
 April 22, 2014
 */
 
-char choose(bool min, int R, int U)
+char choose(bool min, int U, int R)
 {
 	char result;
 	if (min == true)
