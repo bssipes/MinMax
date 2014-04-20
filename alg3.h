@@ -19,7 +19,7 @@ using namespace std;
 
 char chooseRandom()
 {
-	double x = ((double) rand() / (RAND_MAX));
+	int x=rand()%2;
 	if (x==0){return 'U';}
 	else {return 'R';}
 }
@@ -59,13 +59,13 @@ void alg3(vector<vector<int> > fData) //Random
 						case 'U': 
 							Path.append("U");
 							i++;
-							Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
+							Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 							//PathReward += string version of the int at this location along with a "+"
 							break;
 						case 'R':
 							Path.append("R");
 							j++;
-							Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
+							Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at i+1
 							//PathReward += string version of the int at this location along with a "+"
 							break;
 						default:
