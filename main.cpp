@@ -1,7 +1,7 @@
 /* Written by Ben Sipes, except where specifically sourced
 CS404 Algorithms
 April 22, 2014
-Version 0.2
+Version 0.3
 
 PRE-ALGORITHM SETUP
 1) Read in a source file of numbers and GENERATE an 'array' based on this file
@@ -33,6 +33,7 @@ If they're equal, greedy (choose whichever is higher/lower of the immediate choi
 Version History: 
 0.1: Only comments. Wrote up general algorithms for 1, 2, 3, and 4 and described the problem setup steps
 0.2: Able to parse provided sample data
+0.3: #includes and calls to Alg1, Alg2, and Alg3 (min/max, min/max, and "x runs" respectively)
 */
 
 #include <fstream>
@@ -59,14 +60,11 @@ vector<vector<int> > readFile(string filename)
 			std::getline(fin,line, ','); //read in y value, discard
 			std::getline(fin,line); //read in the actual value
 			currentRow.push_back(atoi(line.c_str())); //converts the value from str to int
-//			cout << l;
 		}
 		inputData.push_back(currentRow); //places currentRow instead fileData vector
 		currentRow.clear();
-//		cout << "Finished reading row " << k << endl;
 	}
 	fin.close();
-//	cout << "Finished reading the whole file." << endl;
 	return inputData;
 }
 
