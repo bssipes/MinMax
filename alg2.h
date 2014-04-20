@@ -44,13 +44,14 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
 	int w=fData[0].size()-1; //looks at an inner-level, giving width
-	int i=0;
-	int j=0;
+	int i=0; //iterator for height
+	int j=0; //iterator for width
+	int k=0; //iterator for sortedData
 	string Path = "";
 	string PathReward = "";
 	int Reward=fData[0][0]; //We start on this cell, so we pick up its reward
-	bool movedRight = false;
-	bool movedUp = false;
+//	bool movedRight = false;
+//	bool movedUp = false;
 
 	vector<cV> sortedData;
 	for (i=0; i<=h; i++)
@@ -69,64 +70,59 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 	j=0;
 	if (min == true)
 	{
-		int k = 0;
 		cout << "\nAlg2 MIN on " << h << " x " << w <<endl;
 		sort(sortedData.begin(), sortedData.end()); //SORTED FROM SMALLEST TO LARGEST BY: VALUE, WIDTH, HEIGHT
-		while (!((i ==h) && (j ==w)))
+	}
+	else //min == false
+	{
+		cout << "\nAlg2 MAX on " << h << " x " << w <<endl;
+		sort(sortedData.rbegin(), sortedData.rend()); //SORTED FROM LARGEST TO SMALLEST (reverse iterators) BY: VALUE, WIDTH, HEIGHT
+	}
+	while (!((i ==h) && (j ==w)))
+	{
+		if (sortedData[k].getW()>=j && sortedData[k].getH()>=i)
 		{
-			if (sortedData[k].getW()>=j && sortedData[k].getH()>=i)
+			while (j<sortedData[k].getW())
 			{
-				while (j<sortedData[k].getW())
-				{
-					movedRight = true;
-					cout << "RIGHT from " << i << "," << j << " to " << i << "," << j+1 << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
-					Path.append("R");
-					j++;
-					Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
-					//PathReward += string version of the int at this location along with a "+"
-				}
-				if (movedRight)
-				{
-					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
-				}
-				while (i<sortedData[k].getH())
-				{
-					movedUp = true;
-					cout << "UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
-					Path.append("U");
-					i++;
-					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
-					//PathReward += string version of the int at this location along with a "+"
-				}
-				if (movedUp) 
-				{
-					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
-				} // don't want to display this message twice if we didn't actually move
-				movedRight = false;
-				movedUp = false;
-				cout << "k = " << k << " has been achieved. Incrementing to " << k+1 << endl;
-				k++;//after finishing both of these while loops, we've arrived at the value (sortedData[k]) we were after
-				cout << "k = " << k << endl;
+//				movedRight = true;
+//				cout << "RIGHT from " << i << "," << j << " to " << i << "," << j+1 << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
+				Path.append("R");
+				j++;
+				Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
+				//PathReward += string version of the int at this location along with a "+"
 			}
-			else
+//			if (movedRight)
+//			{
+//				cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
+//			}
+			while (i<sortedData[k].getH())
 			{
-				//if the coordinate of the cV is to the left of where we already are, it is unreachable.
-				//likewise, anything below where we already are is unreachable.
-				//thusly, it needs to be skipped.
-				cout << "k = " << k << " is being skipped." << endl;
-				k++;
+//				movedUp = true;
+//				cout << "UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
+				Path.append("U");
+				i++;
+				Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
+				//PathReward += string version of the int at this location along with a "+"
 			}
+//			if (movedUp) 
+//			{
+//				cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
+//			} // don't want to display this message twice if we didn't actually move
+//			movedRight = false;
+//			movedUp = false;
+//			cout << "k = " << k << " has been achieved. Incrementing to " << k+1 << endl;
+			k++;//after finishing both of these while loops, we've arrived at the value (sortedData[k]) we were after
+//			cout << "k = " << k << endl;
+		}
+		else
+		{
+			//if the coordinate of the cV is to the left of where we already are, it is unreachable.
+			//likewise, anything below where we already are is unreachable.
+			//thusly, it needs to be skipped.
+//			cout << "k = " << k << " is being skipped." << endl;
+			k++;
 		}
 	}
-	//else
-	//{
-	//	cout << "\nAlg2 MAX on " << h << " x " << w <<endl;
-	//  sort(sortedData.rbegin(), sortedData.rend()); //SORTED FROM LARGEST TO SMALLEST (reverse iterators) BY: VALUE, WIDTH, HEIGHT
-	//	while (!((i ==h) && (j ==w)))
-	//	{
-
-	//	}
-	//}
 	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
 	cout << endl << "End reached! Reward: " << Reward << "\nPath taken: " << Path << endl;
 	return;
