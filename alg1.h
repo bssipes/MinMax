@@ -64,7 +64,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 						//PathReward += string version of the int at this location along with a "+"
 						break;
 					default:
-						cout << "Hit default statement within MIN switch. ERROR\n";
+						cout << "Hit default statement within MIN switch. CORRUPTED DATA FROM choose() function! \n";
 						break;
 					} //end switch
 				}
@@ -77,7 +77,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					//PathReward += string version of the int at this location along with a "+"
 				}
 			}
-			else if (i+1>h)
+			else //if (i+1>h)
 			{
 				if (j+1<=w)
 				{
@@ -96,8 +96,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 			}
 		}
 	}
-	//else if (min == false)
-	else
+	else //if min == false
 	{
 		cout << "\nAlg1 MAX on " << h << " x " << w <<endl;
 		while (!((i ==h) && (j ==w)))
@@ -117,18 +116,18 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 //						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
 						Path.append("U");
 						i++;
-						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
+						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 						//PathReward += string version of the int at this location along with a "+"
 						break;
 					case 'R':
 //						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
 						Path.append("R");
 						j++;
-						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
+						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at i+1
 						//PathReward += string version of the int at this location along with a "+"
 						break;
 					default:
-						cout << "Hit default statement within MAX switch. ERROR\n";
+						cout << "Hit default statement within MAX switch. CORRUPTED DATA FROM choose() function!\n";
 						break;
 					} //end switch
 				}
@@ -141,7 +140,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					//PathReward += string version of the int at this location along with a "+"
 				}
 			}
-			else if (i+1>h)
+			else //if (i+1>h)
 			{
 				if (j+1<=w)
 				{
