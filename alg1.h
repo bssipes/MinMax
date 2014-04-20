@@ -40,11 +40,11 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 				if (j+1<=w)
 				{
 //					cout << "   Inside j+1(" << j+1 << ") <= w(" << w << ")" <<endl;
-					choice = choose(min,fData[i+1][j],fData[i][j+1]); //Right first, Up second
+					choice = choose(min,fData[i+1][j],fData[i][j+1]); //Up first, Right second
 					switch (choice)
 					{
 					case 'U': 
-//						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
+						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
 						Path.append("R");
 						j++;
 						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
@@ -52,7 +52,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 						PathReward += " +";
 						break;
 					case 'R':
-//						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
+						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
 						Path.append("U");
 						i++;
 						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
@@ -108,7 +108,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 				if (j+1<=w)
 				{
 //					cout << "   Inside j+1(" << j+1 << ") <= w(" << w << ")" << endl;
-					choice = choose(min,fData[i+1][j],fData[i][j+1]); //min is the name of the bool, don't panic.
+					choice = choose(min,fData[i+1][j],fData[i][j+1]); //Up first, Right second
 					switch (choice)
 					{
 					case 'U': 
