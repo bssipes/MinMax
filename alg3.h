@@ -15,6 +15,7 @@ FORCED to go RIGHT
 #include <string>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 char chooseRandom()
@@ -23,6 +24,12 @@ char chooseRandom()
 	if (x==0){return 'U';}
 	else {return 'R';}
 }
+
+bool compare (const pair<int,string>&x, const pair<int,string>&y)
+{
+	return x.first < y.first;
+}
+
 void alg3(vector<vector<int> > fData) //Random
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
@@ -37,8 +44,8 @@ void alg3(vector<vector<int> > fData) //Random
 	char choice;
 	vector<pair<int,string>> solutions;
 	{
-		cout << "\nAlg3 RANDOM for 100 runs on " << h << " x " << w <<endl;
-		while (k<100) //0 to 99
+		cout << "\nAlg3 RANDOM for 100,000 runs on " << h << " x " << w <<endl;
+		while (k<100000) //0 to 99
 		{
 			//reset variables to initial values
 			i=0;
@@ -81,7 +88,7 @@ void alg3(vector<vector<int> > fData) //Random
 						//PathReward += string version of the int at this location along with a "+"
 					}
 				}
-				else if (i+1>h)
+				else //if (i+1>h)
 				{
 					if (j+1<=w)
 					{
@@ -101,7 +108,11 @@ void alg3(vector<vector<int> > fData) //Random
 			solutions.push_back(std::make_pair(Reward,Path));
 			k++;
 		} //finish the 100 random paths
-
+		sort(solutions.begin(), solutions.end(), compare);
+		cout << "The MIN Reward found: " << solutions[0].first << endl;
+		cout << "Path taken: " << solutions[0].second <<endl;
+		cout << "The MAX Reward found: " << solutions[solutions.size()-1].first << endl;
+		cout << "Path taken: " << solutions[solutions.size()-1].second <<endl;
 //TODO: Find the largest and smallest Reward within solutions. Print MIN Reward Path and MAX Reward Path
 
 	}
