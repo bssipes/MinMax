@@ -51,19 +51,17 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					{
 					case 'U': 
 //						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
-						Path.append("R");
-						j++;
+						Path.append("U");
+						i++;
 						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
-						PathReward += fData[i][j];
-						PathReward += " +";
+						//PathReward += string version of the int at this location along with a "+"
 						break;
 					case 'R':
 //						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
-						Path.append("U");
-						i++;
+						Path.append("R");
+						j++;
 						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
-						PathReward += fData[i][j];
-						PathReward += " +";
+						//PathReward += string version of the int at this location along with a "+"
 						break;
 					default:
 						cout << "Hit default statement within MIN switch. ERROR\n";
@@ -76,8 +74,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
-					PathReward += fData[i][j];
-					PathReward += " +";
+					//PathReward += string version of the int at this location along with a "+"
 				}
 			}
 			else if (i+1>h)
@@ -88,8 +85,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					Path.append("R");
 					j++;
 					Reward += fData[i][j];
-					PathReward += fData[i][j];
-					PathReward += " +";
+					//PathReward += string version of the int at this location along with a "+"
 				}
 				else //this should never be reached because j+1>h and i+1>w should break out of the while loop.
 				{
@@ -119,19 +115,17 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					{
 					case 'U': 
 //						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
-						Path.append("R");
-						j++;
+						Path.append("U");
+						i++;
 						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
-						PathReward += fData[i][j];
-						PathReward += " +";
+						//PathReward += string version of the int at this location along with a "+"
 						break;
 					case 'R':
 //						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
-						Path.append("U");
-						i++;
+						Path.append("R");
+						j++;
 						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
-						PathReward += fData[i][j];
-						PathReward += " +";
+						//PathReward += string version of the int at this location along with a "+"
 						break;
 					default:
 						cout << "Hit default statement within MAX switch. ERROR\n";
@@ -144,8 +138,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
-					PathReward += fData[i][j];
-					PathReward += " +";
+					//PathReward += string version of the int at this location along with a "+"
 				}
 			}
 			else if (i+1>h)
@@ -156,8 +149,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					Path.append("R");
 					j++;
 					Reward += fData[i][j];
-					PathReward += fData[i][j];
-					PathReward += " +";
+					//PathReward += string version of the int at this location along with a "+"
 				}
 				else //this should never be reached because j+1>h and i+1>w should break out of the while loop.
 				{
@@ -168,7 +160,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 			}
 		}
 	}
-	PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
+	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
 	cout << endl << "End reached! Reward: " << Reward << "\nPath taken: " << Path << endl;
 	return;
 }
