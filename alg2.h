@@ -76,32 +76,32 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 		{
 			if (sortedData[k].getW()>=j && sortedData[k].getH()>=i)
 			{
-				while (j!=sortedData[k].getW())
+				while (j<sortedData[k].getW())
 				{
 					movedRight = true;
-					cout << "Traveling RIGHT from " << i << "," << j << " to " << i << "," << j+1 << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
+					cout << "RIGHT from " << i << "," << j << " to " << i << "," << j+1 << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
 					Path.append("R");
 					j++;
 					Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
 					//PathReward += string version of the int at this location along with a "+"
 				}
-				if (movedRight)
-				{
-					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
-				}
-				while (i!=sortedData[k].getH())
+				//if (movedRight)
+				//{
+				//	cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
+				//}
+				while (i<sortedData[k].getH())
 				{
 					movedUp = true;
-					cout << "Traveling UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW() << endl;
+					cout << "UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[0].getH() << "," << sortedData[0].getW() << endl;
 					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 					//PathReward += string version of the int at this location along with a "+"
 				}
-				if (movedUp) 
-				{
-					cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
-				} // don't want to display this message twice if we didn't actually move
+				//if (movedUp) 
+				//{
+				//	cout << "Arrived at " << i << "," << j << " to pick up value: " << fData[i][j] <<endl;
+				//} // don't want to display this message twice if we didn't actually move
 				movedRight = false;
 				movedUp = false;
 				k++;//after finishing both of these while loops, we've arrived at the value (sortedData[k]) we were after
