@@ -30,7 +30,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 	int j=0;
 	string Path = "";
 	string PathReward = "";
-	int Reward=0;
+	int Reward=fData[0][0]; //We start on this cell, so we pick up its reward
 	char choice;
 
 	if (min == true)
