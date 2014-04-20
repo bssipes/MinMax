@@ -1,6 +1,12 @@
+/* Written by Ben Sipes, except where specifically sourced
+CS404 Algorithms
+April 22, 2014
+*/
+
 #include <string>
 #include <iostream>
 #include <vector>
+#include "choose.h"
 using namespace std;
 /*
 Overall, there are 4 options.
@@ -9,34 +15,6 @@ CHOOSE to go UP
 FORCED to go UP
 FORCED to go RIGHT
 */
-char choose(bool min, int R, int U)
-{
-	char result;
-	if (min == true)
-	{
-		if (U < R)
-		{
-			result = 'U';
-		}
-		else // if R is less than or equal, choose R
-		{
-			result = 'R';
-		}
-	}
-	else if (min == false)
-	{
-		if (U > R)
-		{
-			result = 'U';
-		}
-		else //if R is larger or equal, choose R
-		{
-			result = 'R';
-		}
-	}
-	return result;
-}
-
 void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
