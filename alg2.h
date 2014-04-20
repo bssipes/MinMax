@@ -48,7 +48,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 	int j=0;
 	string Path = "";
 	string PathReward = "";
-	int Reward=0;
+	int Reward=fData[0][0]; //We start on this cell, so we pick up its reward
 	bool movedRight = false;
 	bool movedUp = false;
 
@@ -58,6 +58,10 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 		j=0;
 		for (j=0; j<=w; j++)
 		{
+			if (i==0 && j==0)
+			{
+				j++;
+			}
 			sortedData.push_back(cV(i,j,fData[i][j])); //// PLACES ALL VALUES INTO A 1D VECTOR
 		}
 	} //end stripping 2d into 1d vector
