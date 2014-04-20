@@ -4,7 +4,7 @@ April 22, 2014
 
 Algorithm 3: Random Choice
 While this makes no attempt to be the best, it'll help to make sure I have safeguards in for going out of bounds
-Test 100 times, pretend largest is the "approximate" maximum and the smaller is the "approximate" minimum.
+Test x times, pretend largest is the "approximate" maximum and the smaller is the "approximate" minimum.
 
 Overall, there are 4 options.
 CHOOSE to go RIGHT
@@ -28,18 +28,25 @@ void alg3(vector<vector<int> > fData) //Random
 	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
 	int w=fData[0].size()-1; //looks at an inner-level, giving width
-	int i=0;
-	int j=0;
+	int i;
+	int j;
 	int k=0;
-	string Path = "";
-	string PathReward = "";
-	int Reward=fData[0][0]; //We start on this cell, so we pick up its reward
+	string Path;
+	string PathReward;
+	int Reward; //We start on this cell, so we pick up its reward
 	char choice;
 	vector<pair<int,string>> solutions;
 	{
 		cout << "\nAlg3 RANDOM for 100 runs on " << h << " x " << w <<endl;
 		while (k<100) //0 to 99
 		{
+			//reset variables to initial values
+			i=0;
+			j=0;
+			Path = "";
+			PathReward = "";
+			Reward = fData[0][0];
+			
 			while (!((i ==h) && (j ==w)))
 			{
 				if (i+1<= h)
@@ -91,13 +98,12 @@ void alg3(vector<vector<int> > fData) //Random
 					}
 				}
 			} //finish a single path
-			solutions.push_back(std::make_pair(Reward,Path)); 
+			solutions.push_back(std::make_pair(Reward,Path));
 		} //finish the 100 random paths
 
 //TODO: Find the largest and smallest Reward within solutions. Print MIN Reward Path and MAX Reward Path
 
 	}
 	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
-//	cout << endl << "End reached! Reward: " << Reward << "\nPath taken: " << Path << endl;
 	return;
 }
