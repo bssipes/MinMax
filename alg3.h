@@ -69,7 +69,7 @@ void alg3(vector<vector<int> > fData) //Random
 							//PathReward += string version of the int at this location along with a "+"
 							break;
 						default:
-							cout << "Hit default statement within MIN switch. ERROR\n";
+							cout << "Hit default statement within switch. CORRUPTED DATA FROM chooseRandom() function! \n";
 							break;
 						} //end switch
 					}
@@ -99,6 +99,7 @@ void alg3(vector<vector<int> > fData) //Random
 				}
 			} //finish a single path
 			solutions.push_back(std::make_pair(Reward,Path));
+			k++;
 		} //finish the 100 random paths
 
 //TODO: Find the largest and smallest Reward within solutions. Print MIN Reward Path and MAX Reward Path
