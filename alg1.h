@@ -21,21 +21,21 @@ FORCED to go RIGHT
 #include "choose.h"
 using namespace std;
 
-void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
+int alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
 	int w=fData[0].size()-1; //looks at an inner-level, giving width
 	int i=0;
 	int j=0;
-	string Path = "";
-	string PathReward = "";
+//	string Path = "";
+//	string PathReward = "";
 	int Reward=fData[0][0]; //We start on this cell, so we pick up its reward
 	char choice;
 
 	if (min == true)
 	{
-		cout << "\nAlg1 MIN on " << h << " x " << w <<endl;
+		cout << "\nAlg1 MIN on " << h << " x " << w << "... ";
 		while (!((i ==h) && (j ==w)))
 		{
 //			cout << endl << "Current Reward: " << Reward << endl;
@@ -51,14 +51,14 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					{
 					case 'U': 
 //						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
-						Path.append("U");
+//						Path.append("U");
 						i++;
 						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
 						//PathReward += string version of the int at this location along with a "+"
 						break;
 					case 'R':
 //						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
-						Path.append("R");
+//						Path.append("R");
 						j++;
 						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
 						//PathReward += string version of the int at this location along with a "+"
@@ -71,7 +71,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 				else //if (j+1>w)
 				{
 //					cout << "j = " << j << " so I'm FORCED to go UP (+"<<fData[i+1][j]<<")" << endl;
-					Path.append("U");
+//					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
 					//PathReward += string version of the int at this location along with a "+"
@@ -82,7 +82,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 				if (j+1<=w)
 				{
 //					cout << "i = " << i << " so I'm FORCED to go RIGHT (+"<<fData[i][j+1]<<")" << endl;
-					Path.append("R");
+//					Path.append("R");
 					j++;
 					Reward += fData[i][j];
 					//PathReward += string version of the int at this location along with a "+"
@@ -98,7 +98,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 	}
 	else //if min == false
 	{
-		cout << "\nAlg1 MAX on " << h << " x " << w <<endl;
+		cout << "\nAlg1 MAX on " << h << " x " << w << "... " ;
 		while (!((i ==h) && (j ==w)))
 		{
 //			cout << endl << "Current Reward: " << Reward << endl;
@@ -114,14 +114,14 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 					{
 					case 'U': 
 //						cout << fData[i+1][j] << " < " << fData[i][j+1] << " thus I CHOOSE to go RIGHT." << endl;
-						Path.append("U");
+//						Path.append("U");
 						i++;
 						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 						//PathReward += string version of the int at this location along with a "+"
 						break;
 					case 'R':
 //						cout << fData[i+1][j] << " > " << fData[i][j+1] << " thus I CHOOSE to go UP." << endl;
-						Path.append("R");
+//						Path.append("R");
 						j++;
 						Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at i+1
 						//PathReward += string version of the int at this location along with a "+"
@@ -134,7 +134,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 				else //if (j+1>w)
 				{
 //					cout << "j = " << j << " so I'm FORCED to go UP (+"<<fData[i+1][j]<<")" << endl;
-					Path.append("U");
+//					Path.append("U");
 					i++;
 					Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
 					//PathReward += string version of the int at this location along with a "+"
@@ -145,7 +145,7 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 				if (j+1<=w)
 				{
 //					cout << "i = " << i << " so I'm FORCED to go RIGHT (+"<<fData[i][j+1]<<")" << endl;
-					Path.append("R");
+//					Path.append("R");
 					j++;
 					Reward += fData[i][j];
 					//PathReward += string version of the int at this location along with a "+"
@@ -160,6 +160,6 @@ void alg1(bool min, vector<vector<int> > fData) //Greedy - Immediate Neighbor
 		}
 	}
 	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
-	cout << endl << "End reached! Reward: " << Reward << "\nPath taken: " << Path << endl;
-	return;
+	cout << "...Reward: " << Reward << endl; //"\nPath taken: " << Path << endl;
+	return Reward;
 }
