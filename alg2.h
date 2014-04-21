@@ -39,7 +39,7 @@ using namespace std;
 		}
 	}; //end class cV
 
-void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire grid
+int alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire grid
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
@@ -47,8 +47,8 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 	int i=0; //iterator for height
 	int j=0; //iterator for width
 	int k=0; //iterator for sortedData
-	string Path = "";
-	string PathReward = "";
+//	string Path = "";
+//	string PathReward = "";
 	int Reward=fData[0][0]; //We start on this cell, so we pick up its reward
 //	bool movedRight = false;
 //	bool movedUp = false;
@@ -70,12 +70,12 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 	j=0;
 	if (min == true)
 	{
-		cout << "\nAlg2 MIN on " << h << " x " << w <<endl;
+		cout << "\nAlg2 MIN on " << h << " x " << w << "... ";
 		sort(sortedData.begin(), sortedData.end()); //SORTED FROM SMALLEST TO LARGEST BY: VALUE, WIDTH, HEIGHT
 	}
 	else //min == false
 	{
-		cout << "\nAlg2 MAX on " << h << " x " << w <<endl;
+		cout << "\nAlg2 MAX on " << h << " x " << w << "... ";
 		sort(sortedData.rbegin(), sortedData.rend()); //SORTED FROM LARGEST TO SMALLEST (reverse iterators) BY: VALUE, WIDTH, HEIGHT
 	}
 	while (!((i ==h) && (j ==w)))
@@ -86,7 +86,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 			{
 //				movedRight = true;
 //				cout << "RIGHT from " << i << "," << j << " to " << i << "," << j+1 << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
-				Path.append("R");
+//				Path.append("R");
 				j++;
 				Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at j+1
 				//PathReward += string version of the int at this location along with a "+"
@@ -99,7 +99,7 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 			{
 //				movedUp = true;
 //				cout << "UP from " << i << "," << j << " to " << i+1 << "," << j << " and picking up (" << fData[i][j] <<") with destination: " << sortedData[k].getH() << "," << sortedData[k].getW() << endl;
-				Path.append("U");
+//				Path.append("U");
 				i++;
 				Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 				//PathReward += string version of the int at this location along with a "+"
@@ -124,6 +124,6 @@ void alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire gri
 		}
 	}
 	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
-	cout << endl << "End reached! Reward: " << Reward << "\nPath taken: " << Path << endl;
-	return;
+	cout << "...Reward: " << Reward << endl; //"\nPath taken: " << Path << endl;
+	return Reward;
 }
