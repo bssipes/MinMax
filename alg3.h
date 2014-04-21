@@ -25,12 +25,13 @@ char chooseRandom()
 	else {return 'R';}
 }
 
+//CODE ADAPTED FROM http://minhazulhaque.blogspot.com/2012/11/sort-vector-of-pairs-based-on-first-or-second-element.html
 bool compare (const pair<int,string>&x, const pair<int,string>&y)
 {
 	return x.first < y.first;
 }
 
-void alg3(int runs, vector<vector<int> > fData) //Random
+pair<int,int> alg3(int runs, vector<vector<int> > fData) //Random
 {
 	int h=fData.size()-1; //looks at the outter most level, giving height
 //WARNING: ASSUMES ALL ROWS ARE THE SAME WIDTH
@@ -50,8 +51,8 @@ void alg3(int runs, vector<vector<int> > fData) //Random
 			//reset variables to initial values
 			i=0;
 			j=0;
-			Path = "";
-			PathReward = "";
+//			Path = "";
+//			PathReward = "";
 			Reward = fData[0][0];
 			
 			while (!((i ==h) && (j ==w)))
@@ -64,13 +65,13 @@ void alg3(int runs, vector<vector<int> > fData) //Random
 						switch (choice)
 						{
 						case 'U': 
-							Path.append("U");
+//							Path.append("U");
 							i++;
 							Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at j+1
 							//PathReward += string version of the int at this location along with a "+"
 							break;
 						case 'R':
-							Path.append("R");
+//							Path.append("R");
 							j++;
 							Reward += fData[i][j]; //j was increased before the summation, no need to look ahead at i+1
 							//PathReward += string version of the int at this location along with a "+"
@@ -82,7 +83,7 @@ void alg3(int runs, vector<vector<int> > fData) //Random
 					}
 					else //if (j+1>w)
 					{
-						Path.append("U");
+//						Path.append("U");
 						i++;
 						Reward += fData[i][j]; //i was increased before the summation, no need to look ahead at i+1
 						//PathReward += string version of the int at this location along with a "+"
@@ -92,7 +93,7 @@ void alg3(int runs, vector<vector<int> > fData) //Random
 				{
 					if (j+1<=w)
 					{
-						Path.append("R");
+//						Path.append("R");
 						j++;
 						Reward += fData[i][j];
 						//PathReward += string version of the int at this location along with a "+"
@@ -110,12 +111,10 @@ void alg3(int runs, vector<vector<int> > fData) //Random
 		} //finish the 100 random paths
 		sort(solutions.begin(), solutions.end(), compare);
 		cout << "The MIN Reward found: " << solutions[0].first << endl;
-		cout << "Path taken: " << solutions[0].second <<endl;
-		cout << "The MAX Reward found: " << solutions[solutions.size()-1].first << endl;
-		cout << "Path taken: " << solutions[solutions.size()-1].second <<endl;
-//TODO: Find the largest and smallest Reward within solutions. Print MIN Reward Path and MAX Reward Path
-
+//		cout << "Path taken: " << solutions[0].second <<endl;
+		cout << endl << "The MAX Reward found: " << solutions[solutions.size()-1].first << endl;
+//		cout << "Path taken: " << solutions[solutions.size()-1].second <<endl;
 	}
 	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
-	return;
+	return (std::make_pair(solutions[0].first, solutions[solutions.size()-1].first));
 }
