@@ -1,7 +1,7 @@
 /* Written by Ben Sipes, except where specifically sourced
 CS404 Algorithms
 April 22, 2014
-Version 0.3
+Version 0.4
 
 PRE-ALGORITHM SETUP
 1) Read in a source file of numbers and GENERATE an 'array' based on this file
