@@ -22,18 +22,12 @@ Algorithm 3: Random Choice
 While this makes no attempt to be the best, it'll help to make sure I have safeguards in for going out of bounds
 Test x times, pretend largest is the "approximate" maximum and the smaller is the "approximate" minimum.
 
-Algorithm 4: 
-Sum all choices by row and by column
-For each choice, choose whichever has a smaller sum (to maximize)
-or larger sum (minimize)
-If they're equal, greedy (choose whichever is higher/lower of the immediate choices)
-(NOTE: I will need to constantly update the values for each row and column as I move. Is this worth it?)
-
 
 Version History: 
 0.1: Only comments. Wrote up general algorithms for 1, 2, 3, and 4 and described the problem setup steps
 0.2: Able to parse provided sample data
 0.3: #includes and calls to Alg1, Alg2, and Alg3 (min/max, min/max, and "x runs" respectively)
+0.4: The wall and cpu timers for al1, al2, and alg3
 */
 
 #include <fstream>
@@ -68,13 +62,79 @@ vector<vector<int> > readFile(string filename)
 	return inputData;
 }
 
+//The following 2 functions are from:  http://stackoverflow.com/questions/17432502/how-can-i-measure-cpu-time-and-wall-clock-time-on-both-linux-windows
+#ifdef _WIN32
+#include <Windows.h>
+double get_wall_time(){
+    LARGE_INTEGER time,freq;
+    if (!QueryPerformanceFrequency(&freq)){
+        //  Handle error
+        return 0;
+    }
+    if (!QueryPerformanceCounter(&time)){
+        //  Handle error
+        return 0;
+    }
+    return (double)time.QuadPart / freq.QuadPart;
+}
+double get_cpu_time(){
+    FILETIME a,b,c,d;
+    if (GetProcessTimes(GetCurrentProcess(),&a,&b,&c,&d) != 0){
+        //  Returns total user time.
+        //  Can be tweaked to include kernel times as well.
+        return
+            (double)(d.dwLowDateTime |
+            ((unsigned long long)d.dwHighDateTime << 32)) * 0.0000001;
+    }else{
+        //  Handle error
+        return 0;
+    }
+}
+#endif
+
 void main()
 {
 	vector<vector<int> > fileData = readFile("data.txt");
+//Alg1 MIN
+	double wall0 = get_wall_time();
+	double cpu0 = get_cpu_time();
 	alg1(true,fileData);
+	double wall1 = get_wall_time();
+	double cpu1 = get_cpu_time();
+	cout << "Wall Time = " << wall1 - wall0 << endl;
+    cout << "CPU Time  = " << cpu1  - cpu0  << endl;
+//Alg1 MAX
+	double wall2 = get_wall_time();
+	double cpu2 = get_cpu_time();
 	alg1(false,fileData);
+	double wall3 = get_wall_time();
+	double cpu3 = get_cpu_time();
+	cout << "Wall Time = " << wall3 - wall2 << endl;
+    cout << "CPU Time  = " << cpu3  - cpu2  << endl;
+//Alg2 MIN
+	double wall4 = get_wall_time();
+	double cpu4 = get_cpu_time();
 	alg2(true,fileData);
+	double wall5 = get_wall_time();
+	double cpu5 = get_cpu_time();
+	cout << "Wall Time = " << wall5 - wall4 << endl;
+    cout << "CPU Time  = " << cpu5  - cpu4  << endl;
+//Alg2 MAX
+	double wall6 = get_wall_time();
+	double cpu6 = get_cpu_time();
 	alg2(false,fileData);
+	double wall7 = get_wall_time();
+	double cpu7 = get_cpu_time();
+	cout << "Wall Time = " << wall7 - wall6 << endl;
+    cout << "CPU Time  = " << cpu7  - cpu6  << endl;
+//Alg3 100,000 runs
+	double wall8 = get_wall_time();
+	double cpu8 = get_cpu_time();
 	alg3(100000, fileData); //100,000 runs
+	double wall9 = get_wall_time();
+	double cpu9 = get_cpu_time();
+	cout << "Wall Time = " << wall9 - wall8 << endl;
+    cout << "CPU Time  = " << cpu9  - cpu8  << endl;
+
 	return;
 }
