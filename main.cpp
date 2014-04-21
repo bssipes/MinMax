@@ -30,7 +30,9 @@ Version History:
 0.5: Added a function to randomly generate data on any sized input and save the document. The rest of the program
 	is unaffected, sparing the name of the file from which I read data.
 0.51: Attempted to store, sort, and print master results. Getting conversion error.
-"Error	2	error C2664: 'std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)' : cannot convert parameter 1 from 'int' to 'const std::basic_string<_Elem,_Traits,_Ax> &'	c:\program files (x86)\microsoft visual studio 10.0\vc\include\utility	163"
+"Error	2	error C2664: 'std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,
+_Ax> &)' : cannot convert parameter 1 from 'int' to 'const std::basic_string<_Elem,_Traits,_Ax> &'	
+c:\program files (x86)\microsoft visual studio 10.0\vc\include\utility	163"
 */
 
 #include <fstream>
