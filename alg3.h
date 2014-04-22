@@ -112,7 +112,7 @@ pair<int,int> alg3(int runs, vector<vector<int> > fData) //Random
 		sort(solutions.begin(), solutions.end(), compare);
 		cout << "The MIN Reward found: " << solutions[0].first << endl;
 //		cout << "Path taken: " << solutions[0].second <<endl;
-		cout << endl << "The MAX Reward found: " << solutions[solutions.size()-1].first << endl;
+		cout << "The MAX Reward found: " << solutions[solutions.size()-1].first << endl;
 //		cout << "Path taken: " << solutions[solutions.size()-1].second <<endl;
 	}
 	//PathReward.erase(PathReward.length()-1); //remove the trailing + before printing
