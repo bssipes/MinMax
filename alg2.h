@@ -37,6 +37,13 @@ using namespace std;
 			else if (width != other.width) return width < other.width;
 			else return height < other.height;
 		}
+		bool operator > (const cV &other) const
+		{
+			//Sorts by Value, then W, then H (largest to smallest)
+			if (value != other.value) return value > other.value;
+			else if (width != other.width) return width > other.width;
+			else return height > other.height;
+		}
 	}; //end class cV
 
 int alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire grid
@@ -71,12 +78,14 @@ int alg2(bool min, vector<vector<int> > fData) //Greedy - Min/Max of entire grid
 	if (min == true)
 	{
 		cout << "\nAlg2 MIN on " << h << " x " << w << "... ";
-		sort(sortedData.begin(), sortedData.end()); //SORTED FROM SMALLEST TO LARGEST BY: VALUE, WIDTH, HEIGHT
+		std::sort(sortedData.begin(), sortedData.end()); //SORTED FROM SMALLEST TO LARGEST BY: VALUE, WIDTH, HEIGHT
 	}
 	else //min == false
 	{
 		cout << "\nAlg2 MAX on " << h << " x " << w << "... ";
-		sort(sortedData.rbegin(), sortedData.rend()); //SORTED FROM LARGEST TO SMALLEST (reverse iterators) BY: VALUE, WIDTH, HEIGHT
+		//sort(sortedData.rbegin(), sortedData.rend()); //SORTED FROM LARGEST TO SMALLEST (reverse iterators) BY: VALUE, WIDTH, HEIGHT
+		std::reverse(sortedData.begin(), sortedData.end());
+		
 	}
 	while (!((i ==h) && (j ==w)))
 	{
