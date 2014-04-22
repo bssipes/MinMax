@@ -1,13 +1,12 @@
 /* Written by Ben Sipes, except where specifically sourced
 CS404 Algorithms
 April 22, 2014
-Version 0.51
+Version 0.6
 
 PRE-ALGORITHM SETUP
 1) Read in a source file of numbers and GENERATE an 'array' based on this file
 (Potentially CSV or seperated by spaces / new lines. Data structure is not set in stone and should be tested for efficiency)
 2) Add in code to time the algorithm
-(SVC-calls, CPTime)
 
 Algorithm 1: Greedy-Immediate Neighbors
 Compare all 1-step options (i+1, j+1) (up or right), choose LARGEST/SMALLEST (WARNING: STAY IN BOUNDS!), ADD to sum, RECORD path
@@ -20,7 +19,7 @@ Go to next largest (target[j] >= current[j] and target[i] >= current[i]) by the 
 
 Algorithm 3: Random Choice
 While this makes no attempt to be the best, it'll help to make sure I have safeguards in for going out of bounds
-Test x times, pretend largest is the "approximate" maximum and the smaller is the "approximate" minimum.
+Test x times, largest is the "approximate" maximum and the smallest is the "approximate" minimum.
 
 Version History:
 0.1: Only comments. Wrote up general algorithms for 1, 2, 3, and 4 and described the problem setup steps
@@ -30,9 +29,9 @@ Version History:
 0.5: Added a function to randomly generate data on any sized input and save the document. The rest of the program
 	is unaffected, sparing the name of the file from which I read data.
 0.51: Attempted to store, sort, and print master results. Getting conversion error.
-"Error	2	error C2664: 'std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,
-_Ax> &)' : cannot convert parameter 1 from 'int' to 'const std::basic_string<_Elem,_Traits,_Ax> &'	
-c:\program files (x86)\microsoft visual studio 10.0\vc\include\utility	163"
+"Error	2	error C2664: 'std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)' : cannot convert parameter 1 from 'int' to 'const std::basic_string<_Elem,_Traits,_Ax> &'	c:\program files (x86)\microsoft visual studio 10.0\vc\include\utility	163"
+0.6: Fixed the conversion error. It was being caused by compare() from alg3, which expected pair<int,string>. Made a new compareII for pair<int,int>
+	Cleaned up a lot of the extra cout statements (such as the Path prints). Still in comments.
 */
 
 #include <fstream>
@@ -122,15 +121,20 @@ double get_cpu_time()
 }
 #endif
 
+bool compareII (const pair<int,int>&x, const pair<int,int>&y)
+{
+	return x.first < y.first;
+}
+
 void main()
 {
 	cout << "Generating random data now... ";
 	double wall10 = get_wall_time();
 	double cpu10 = get_cpu_time();
-	generateData(1024,1024);
+	generateData(1024, 1024);
 	double wall12 = get_wall_time();
 	double cpu12 = get_cpu_time();
-	cout << endl << "Random data complete!\n";
+	cout << "data generation complete!\n";
 	cout << "Wall Time to generate= " << wall12 - wall10 << endl;
     cout << "CPU Time  to generate= " << cpu12  - cpu10  << endl;
 	vector<vector<int> > fileData = readFile("random.txt");
@@ -152,7 +156,7 @@ void main()
 	double wall2 = get_wall_time();
 	double cpu2 = get_cpu_time();
 	int alg1max = alg1(false,fileData);
-	maxResults.push_back(std::make_pair(alg1max,1));
+	maxResults.push_back(std::make_pair(alg1max, 1));
 	double wall3 = get_wall_time();
 	double cpu3 = get_cpu_time();
 	cout << "Wall Time = " << wall3 - wall2 << endl;
@@ -162,7 +166,7 @@ void main()
 	double wall4 = get_wall_time();
 	double cpu4 = get_cpu_time();
 	int alg2min = alg2(true,fileData);
-	minResults.push_back(std::make_pair(alg2min,2));
+	minResults.push_back(std::make_pair(alg2min, 2));
 	double wall5 = get_wall_time();
 	double cpu5 = get_cpu_time();
 	cout << "Wall Time = " << wall5 - wall4 << endl;
@@ -172,7 +176,7 @@ void main()
 	double wall6 = get_wall_time();
 	double cpu6 = get_cpu_time();
 	int alg2max = alg2(false,fileData);
-	maxResults.push_back(std::make_pair(alg2max,2));
+	maxResults.push_back(std::make_pair(alg2max, 2));
 	double wall7 = get_wall_time();
 	double cpu7 = get_cpu_time();
 	cout << "Wall Time = " << wall7 - wall6 << endl;
@@ -182,16 +186,16 @@ void main()
 	double wall8 = get_wall_time();
 	double cpu8 = get_cpu_time();
 	pair<int,int> alg3results = alg3(1000, fileData); //1000 runs
-	minResults.push_back(std::make_pair(alg3results.first,3));
-	maxResults.push_back(std::make_pair(alg3results.second,3));
+	minResults.push_back(std::make_pair(alg3results.first, 3));
+	maxResults.push_back(std::make_pair(alg3results.second, 3));
 	double wall9 = get_wall_time();
 	double cpu9 = get_cpu_time();
 	cout << "Wall Time = " << wall9 - wall8 << endl;
     cout << "CPU Time  = " << cpu9  - cpu8  << endl;
 
-//Compare Results (compare is defined in alg3)
-	sort(minResults.begin(), minResults.end(), compare);
-	sort(maxResults.rbegin(), maxResults.rend(), compare);
+//Compare Results (compare is in MAIN, because alg3 is for pair<int,string>)
+	sort(minResults.begin(), minResults.end(), compareII);
+	sort(maxResults.rbegin(), maxResults.rend(), compareII);
 	cout << "The overall smallest reward (" << minResults[0].first << ") was found by Alg" << minResults[0].second << endl;
 	cout << "The overall largest reward (" << maxResults[0].first << ") was found by Alg" << maxResults[0].second << endl;
 
